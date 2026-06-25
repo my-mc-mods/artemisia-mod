@@ -1,0 +1,34 @@
+[versions]
+minecraft = "26.1"
+# https://fabricmc.net/develop/
+fabric-loader = "0.19.2"
+# https://projects.neoforged.net/neoforged/neoforge
+neoforge = "26.1.0.19-beta"
+# Plugins
+shadow = "9.4.1"
+architectury-plugin = "3.5.166"
+architectury-loom = "1.14.473"
+# Fabric
+fabric-modmenu = "18.0.0-alpha.8"
+# NeoForge
+neoforge-bettermodlist = "26.1.2"
+
+lombok = "1.18.46"
+evalex = "3.6.1"
+maven-artifact = "3.9.16"
+
+[plugins]
+shadow = { id = "com.gradleup.shadow", version.ref = "shadow" }
+architectury-plugin = { id = "architectury-plugin", version.ref = "architectury-plugin" }
+architectury-loom = { id = "dev.architectury.loom-no-remap", version.ref = "architectury-loom" }
+
+[libraries]
+lombok = { module = "org.projectlombok:lombok", version.ref = "lombok" }
+evalex = { module = "com.ezylang:EvalEx", version.ref = "evalex" }
+maven-artifact = { module = "org.apache.maven:maven-artifact", version.ref = "maven-artifact" }
+# Fabric
+fabric-loader = { module = "net.fabricmc:fabric-loader", version.ref = "fabric-loader" }
+fabric-modmenu = { module = "com.terraformersmc:modmenu", version.ref = "fabric-modmenu" }
+# NeoForge
+neoforge = { module = "net.neoforged:neoforge", version.ref = "neoforge" }
+neoforge-bettermodlist = { module = "maven.modrinth:better-modlist", version.ref = "neoforge-bettermodlist" }

@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "id": "generated-at-build-time",
+  "version": "0.0.0-generated-at-build-time",
+  "name": "generated at build time",
+  "description": "generated at build time",
+  "authors": [
+    "generated at build time"
+  ],
+  "license": "generated at build time",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "dev.aika.artemisia.fabric.ArtemisiaFabric"
+    ],
+    "client": [
+      "dev.aika.artemisia.fabric.ArtemisiaFabricClient"
+    ]
+  },
+  "mixins": [],
+  "depends": {
+    "fabricloader": "*",
+    "minecraft": ">=26.1",
+    "java": ">=25"
+  },
+  "suggests": {
+    "another-mod": "*"
+  }
+}

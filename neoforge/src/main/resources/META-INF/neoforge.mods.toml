@@ -1,0 +1,22 @@
+modLoader = "javafml"
+loaderVersion = "[4,)"
+license = "generated at build time"
+
+[[mods]]
+modId = "generated-at-build-time"
+version = "0.0.0-generated-at-build-time"
+displayName = "generated at build time"
+
+[[dependencies.generated-at-build-time]]
+modId = "neoforge"
+type = "required"
+versionRange = "[26,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.generated-at-build-time]]
+modId = "minecraft"
+type = "required"
+versionRange = "[26.1,)"
+ordering = "NONE"
+side = "BOTH"

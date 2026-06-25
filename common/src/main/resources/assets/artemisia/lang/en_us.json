@@ -1,0 +1,5 @@
+{
+  "modmenu.nameTranslation.artemisia": "Artemisia",
+  "modmenu.descriptionTranslation.artemisia": "Artemisia is a cross-platform modding library providing shared APIs and utilities.",
+  "text.artemisia.error.missing_kotlin_adapter": "Missing required Kotlin adapter. Artemisia failed to load!\n\nPlease install [Kotlin for Forge] or [KotlinLangForge] mod."
+}
