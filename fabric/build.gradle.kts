@@ -1,11 +1,7 @@
-@file:Suppress("AvoidDuplicateDependencies")
+@file:Suppress("SpellCheckingInspection", "AvoidDuplicateDependencies")
 
 plugins {
-    id("mod-platform")
-}
-
-loom {
-    accessWidenerPath = project(":common").loom.accessWidenerPath
+    id("multiloader-fabric")
 }
 
 repositories {
@@ -13,12 +9,20 @@ repositories {
 }
 
 dependencies {
-    minecraft("com.mojang:minecraft:${libs.versions.minecraft.get()}")
-    implementation(libs.fabric.loader)
-    localRuntime(libs.fabric.modmenu)
+    localRuntime(libs.fabric.api)
+    compileOnly(libs.fabric.modmenu)
+    localRuntime(libs.fabric.modmenu) { isTransitive = false }
 
-    compileOnly(libs.evalex.get())?.let { shadowCommon("$it") }
-    compileOnly(libs.maven.artifact.get())?.let {
-        shadowCommon("$it") { exclude(group = "org.codehaus.plexus") }
+    implementation(libs.semver4j) {
+        shadowDep(copy()) { isTransitive = false }
+    }
+    implementation(libs.luaj.jse) { shadowDep(copy()) }
+    implementation(libs.taffy) {
+        shadowDep(copy()) { isTransitive = false }
+    }
+    implementation(libs.cssparser) {
+        shadowDep(copy()) { isTransitive = false }
     }
 }
+
+operator fun String.invoke(): String = rootProject.ext[this] as? String ?: error("No property \"$this\"")

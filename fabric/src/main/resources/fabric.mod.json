@@ -11,17 +11,14 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "dev.aika.artemisia.fabric.ArtemisiaFabric"
-    ],
-    "client": [
-      "dev.aika.artemisia.fabric.ArtemisiaFabricClient"
+      "dev.aika.artemisia.Artemisia"
     ]
   },
   "mixins": [],
   "depends": {
     "fabricloader": "*",
-    "minecraft": ">=26.1",
-    "java": ">=25"
+    "minecraft": "${fabric_minecraft_version_range}",
+    "java": ">=17"
   },
   "suggests": {
     "another-mod": "*"

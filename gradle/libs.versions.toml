@@ -1,34 +1,38 @@
-[versions]
-minecraft = "26.1"
-# https://fabricmc.net/develop/
-fabric-loader = "0.19.2"
-# https://projects.neoforged.net/neoforged/neoforge
-neoforge = "26.1.0.19-beta"
-# Plugins
-shadow = "9.4.1"
-architectury-plugin = "3.5.166"
-architectury-loom = "1.14.473"
-# Fabric
-fabric-modmenu = "18.0.0-alpha.8"
-# NeoForge
-neoforge-bettermodlist = "26.1.2"
-
-lombok = "1.18.46"
-evalex = "3.6.1"
-maven-artifact = "3.9.16"
-
 [plugins]
 shadow = { id = "com.gradleup.shadow", version.ref = "shadow" }
-architectury-plugin = { id = "architectury-plugin", version.ref = "architectury-plugin" }
-architectury-loom = { id = "dev.architectury.loom-no-remap", version.ref = "architectury-loom" }
+
+[versions]
+shadow = "9.4.1"
+lombok = "1.18.46"
+semver4j = "6.0.0"
+luaj-jse = "3.0.1"
+taffy = "1.1.4"
+cssparser = "08121b9081dfea425038f76ee89307dda443d546" # 1.7.0
+diffutils = "4.17"
+
+# NeoForge
+# https://projects.neoforged.net/neoforged/neoforge
+neoforge = "26.1.2.94"
+# https://projects.neoforged.net/neoforged/neoform
+neoform = "26.1.2-1"
+# https://projects.neoforged.net/neoforged/moddevgradle
+moddev = "2.0.143"
+# Fabric
+# https://fabricmc.net/develop/
+fabric-api = "0.145.4+26.1.2"
+fabric-loader = "0.19.3"
+fabric-loom = "1.17.16"
+# https://modrinth.com/mod/modmenu/versions
+fabric-modmenu = "18.0.0"
 
 [libraries]
 lombok = { module = "org.projectlombok:lombok", version.ref = "lombok" }
-evalex = { module = "com.ezylang:EvalEx", version.ref = "evalex" }
-maven-artifact = { module = "org.apache.maven:maven-artifact", version.ref = "maven-artifact" }
+semver4j = { module = "org.semver4j:semver4j", version.ref = "semver4j" }
+luaj-jse = { module = "org.luaj:luaj-jse", version.ref = "luaj-jse" }
+taffy = { module = "dev.vfyjxf:taffy", version.ref = "taffy" }
+cssparser = { module = "com.github.xleavx:osbcp-css-parser", version.ref = "cssparser" }
+diffutils = { module = "io.github.java-diff-utils:java-diff-utils", version.ref = "diffutils" }
 # Fabric
 fabric-loader = { module = "net.fabricmc:fabric-loader", version.ref = "fabric-loader" }
+fabric-api = { module = "net.fabricmc.fabric-api:fabric-api", version.ref = "fabric-api" }
 fabric-modmenu = { module = "com.terraformersmc:modmenu", version.ref = "fabric-modmenu" }
-# NeoForge
-neoforge = { module = "net.neoforged:neoforge", version.ref = "neoforge" }
-neoforge-bettermodlist = { module = "maven.modrinth:better-modlist", version.ref = "neoforge-bettermodlist" }

@@ -1,0 +1,18 @@
+# Project
+id = "artemisia"
+group = "dev.aika.artemisia"
+version = "0.1.0"
+
+# Mod
+name = "Artemisia"
+license = "EPL-2.0"
+description = """
+Artemisia is a cross-platform modding library providing shared APIs and utilities.
+"""
+authors = ["Gizmo"]
+contributors = []
+
+# Contact
+homepage = "https://github.com/my-mc-mods/artemisia-mod"
+sources = "https://github.com/my-mc-mods/artemisia-mod"
+issues = "https://github.com/my-mc-mods/artemisia-mod/issues"

@@ -1,5 +1,11 @@
 [tools]
 java = "25"
 
+[env]
+_.file = '.env'
+
 [tasks.build]
 run = "./gradlew clean build"
+
+[tasks.publish2local]
+run = "./gradlew publishToMavenLocal"

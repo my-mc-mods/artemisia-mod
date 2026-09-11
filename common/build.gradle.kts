@@ -1,33 +1,39 @@
 @file:Suppress("AvoidDuplicateDependencies")
 
 plugins {
-    id("mod-common")
+    id("multiloader-common")
 }
 
-loom {
-    val aw = file("src/main/resources/${mod.id}.accesswidener")
-    if (aw.exists()) accessWidenerPath.set(aw)
+repositories {
 }
 
 dependencies {
-    minecraft("com.mojang:minecraft:${libs.versions.minecraft.get()}")
-    implementation(libs.fabric.loader)
-
-    testImplementation(platform("org.junit:junit-bom:6.0.0"))
-    testImplementation("org.junit.jupiter:junit-jupiter")
-    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
-    testCompileOnly(libs.lombok)
-    testAnnotationProcessor(libs.lombok)
-
-    implementation(libs.evalex.get())?.let { shadowCommon("$it") }
-    implementation(libs.maven.artifact.get())?.let {
-        shadowCommon("$it") { exclude(group = "org.codehaus.plexus") }
+    implementation(libs.semver4j) {
+        shadowDep(copy()) { isTransitive = false }
+    }
+    implementation(libs.luaj.jse) { shadowDep(copy()) }
+    implementation(libs.taffy) {
+        shadowDep(copy()) { isTransitive = false }
+    }
+    implementation(libs.cssparser) {
+        shadowDep(copy()) { isTransitive = false }
+    }
+    implementation(libs.diffutils) {
+        shadowDep(copy()) { isTransitive = false }
     }
 }
 
+dependencies {
+    testImplementation("org.slf4j:slf4j-api:2.0.17")
+    testImplementation("org.apache.logging.log4j:log4j-slf4j2-impl:2.25.2")
+    testCompileOnly("org.jetbrains:annotations:26.0.2")
+    testImplementation("com.google.guava:guava:33.5.0-jre")
+}
 tasks.test {
     useJUnitPlatform()
     testLogging {
         events("passed", "skipped", "failed")
     }
 }
+
+operator fun String.invoke(): String = rootProject.ext[this] as? String ?: error("No property \"$this\"")
