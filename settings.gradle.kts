@@ -20,3 +20,5 @@ includeBuild("build-logic")
 include("common")
 include("fabric")
 include("neoforge")
+
+include("example-mod")
