@@ -1,7 +1,7 @@
 # Project
 id = "artemisia"
 group = "dev.aika.artemisia"
-version = "0.1.0"
+version = "0.1.0-unreleased"
 
 # Mod
 name = "Artemisia"
