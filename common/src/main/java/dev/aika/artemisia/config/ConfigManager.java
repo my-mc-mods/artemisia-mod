@@ -1,9 +1,8 @@
 package dev.aika.artemisia.config;
 
-import com.google.gson.Gson;
-import dev.aika.artemisia.config.annotations.Config;
-import dev.aika.artemisia.json.GsonProvider;
-import dev.aika.artemisia.json.serializer.IdentifierSerializer;
+import dev.aika.artemisia.platform.PlatformHelper;
+import dev.aika.artemisia.config.json.GsonProvider;
+import dev.aika.artemisia.config.json.serializer.IdentifierSerializer;
 import lombok.Getter;
 import lombok.SneakyThrows;
 import net.minecraft.resources.Identifier;
@@ -12,63 +11,80 @@ import java.io.*;
 import java.nio.file.Path;
 import java.util.function.Supplier;
 
-@SuppressWarnings({"unused", "UnusedReturnValue"})
+@SuppressWarnings("unused")
 public class ConfigManager<T> implements Supplier<T> {
-    private final Supplier<T> defaultValueFactory;
+    @Getter
+    private final Class<T> configClass;
+    @Getter
+    private final Config configAnnotation;
+    private final Supplier<T> defaultSupplier;
     private final ConfigCodec<T> codec;
-    //    private final Config annotation;
-    private T value;
+    @Getter
+    private final Path configDirectory;
     @Getter
     private final File file;
 
-    public ConfigManager(Supplier<T> defaultValueFactory, ConfigCodec<T> codec, Path configDir) {
-        value = defaultValueFactory.get();
-        Config annotation = value.getClass().getAnnotation(Config.class);
-        if (annotation == null) throw new IllegalStateException("@Config is not present");
-        file = new File(configDir.toFile(),
-                String.format("%s-%s.json", annotation.value(), annotation.type()));
-        this.defaultValueFactory = defaultValueFactory;
+    private T config;
+
+    private ConfigManager(Class<T> clazz, Supplier<T> defaultSupplier, ConfigCodec<T> codec, Path configDir) {
+        this.configAnnotation = clazz.getAnnotation(Config.class);
+        if (configAnnotation == null) throw new IllegalStateException("@Config is not present");
+        this.configClass = clazz;
+        this.configDirectory = configDir;
+        this.defaultSupplier = defaultSupplier;
         this.codec = codec;
+        this.file = new File(configDir.toFile(),
+                String.format("%s-%s.json", configAnnotation.value(), configAnnotation.type()));
+        this.config = defaultSupplier.get();
     }
 
-    public ConfigManager(Supplier<T> defaultValueFactory, Gson gson, Path configDir) {
-        this(defaultValueFactory, new GsonCodec<>(gson, defaultValueFactory.get().getClass()), configDir);
+    public static <T> ConfigManager<T> create(Class<T> clazz, Supplier<T> defaultSupplier, ConfigCodec<T> codec, Path configDir) {
+        return new ConfigManager<>(clazz, defaultSupplier, codec, configDir);
     }
 
-    public ConfigManager(Supplier<T> defaultValueFactory, Path configDir) {
-        this(defaultValueFactory, GsonProvider.GSON, configDir);
-    }
-
-    public static <T> ConfigManager<T> create(
-            Supplier<T> defaultValueFactory, Path configDir
-    ) {
-        return new ConfigManager<>(
-                defaultValueFactory,
-                GsonProvider.gsonBuilder()
+    public static <T> ConfigManager<T> create(Class<T> clazz, Supplier<T> defaultSupplier, Path configDir) {
+        return create(clazz, defaultSupplier,
+                new GsonCodec<>(GsonProvider.gsonBuilder()
                         .registerTypeAdapter(Identifier.class, new IdentifierSerializer())
-                        .setPrettyPrinting()
-                        .create(),
-                configDir
-        );
+                        .disableHtmlEscaping().setPrettyPrinting()
+                        .create(), clazz),
+                configDir);
     }
 
-    @Override public T get() {
-        return value;
+    public static <T> ConfigManager<T> create(Class<T> clazz, Supplier<T> defaultSupplier) {
+        return create(clazz, defaultSupplier, PlatformHelper.get().getConfigDir());
+    }
+
+    public static <T> ConfigManager<T> create(Class<T> clazz) {
+        return create(clazz, () -> createDefaultConfig(clazz));
+    }
+
+    private static <T> T createDefaultConfig(Class<T> clazz) {
+        try {
+            return clazz.getDeclaredConstructor().newInstance();
+        } catch (Exception e) {
+            throw new RuntimeException("Could not instantiate " + clazz.getName(), e);
+        }
+    }
+
+    @Override
+    public T get() {
+        return config;
     }
 
     @SneakyThrows
     public ConfigManager<T> save() {
         try (var writer = new FileWriter(file)) {
-            write(writer, value);
+            write(writer, config);
         }
         return this;
     }
 
     @SneakyThrows
     public ConfigManager<T> load() {
-        if (!file.exists()) save();
+        if (!file.exists()) return save();
         else try (var reader = new FileReader(file)) {
-            value = read(reader);
+            config = read(reader);
         }
         return this;
     }
@@ -78,15 +94,23 @@ public class ConfigManager<T> implements Supplier<T> {
     }
 
     private T read(Reader reader) {
-        value = codec.decode(reader);
-        return value;
+        config = codec.decode(reader);
+        return config;
     }
 
-    public T getDefaultValue() {
-        return defaultValueFactory.get();
+    public T getDefaultConfig() {
+        return defaultSupplier.get();
     }
 
-    public void reset() {
-        value = defaultValueFactory.get();
+    public String getModId() {
+        return configAnnotation.value();
+    }
+
+    public String getDefaultCategory() {
+        return configAnnotation.defaultCategory();
+    }
+
+    public String getType() {
+        return configAnnotation.type();
     }
 }
