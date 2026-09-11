@@ -45,5 +45,7 @@ bin/
 run/
 runs/
 logs/
-.architectury-transformer/
-assets/custom/
+.custom/*
+!.custom/.gitkeep
+**/.env*
+!**/.env*_example
