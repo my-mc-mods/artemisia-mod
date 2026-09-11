@@ -1,5 +1,4 @@
 {
   "modmenu.nameTranslation.artemisia": "艾草",
-  "modmenu.descriptionTranslation.artemisia": "艾草是一个跨平台的模组开发基础库，为其他模组提供共享的 API 和工具集。",
-  "text.artemisia.error.missing_kotlin_adapter": "未找到所需的 Kotlin 语言适配器。艾草 加载失败。\n\n请安装 Kotlin for Forge 或 KotlinLangForge 模组。"
+  "modmenu.descriptionTranslation.artemisia": "艾草是一个跨平台的模组开发基础库，为其他模组提供共享的 API 和工具集。"
 }
