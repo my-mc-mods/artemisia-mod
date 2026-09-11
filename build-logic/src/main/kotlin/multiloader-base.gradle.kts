@@ -83,6 +83,10 @@ tasks {
             )
         )
     }
+
+    tasks.named("clean") {
+        doLast { delete("logs") }
+    }
 }
 
 // Declare capabilities on the outgoing configurations.
