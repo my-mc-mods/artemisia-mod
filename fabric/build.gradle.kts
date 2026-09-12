@@ -9,9 +9,8 @@ repositories {
 }
 
 dependencies {
-    localRuntime(libs.fabric.api)
     compileOnly(libs.fabric.modmenu)
-    localRuntime(libs.fabric.modmenu) { isTransitive = false }
+    localRuntime(libs.fabric.modmenu)
 
     implementation(libs.semver4j) {
         shadowDep(copy()) { isTransitive = false }
