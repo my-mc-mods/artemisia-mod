@@ -10,8 +10,9 @@ subprojects {
     plugins.apply("maven-publish")
 
     repositories {
-        maven("https://api.modrinth.com/maven") {
-            content { includeGroup("maven.modrinth") }
+        exclusiveContent {
+            forRepository { maven("https://api.modrinth.com/maven") }
+            filter { includeGroup("maven.modrinth") }
         }
         exclusiveContent {
             forRepository { maven("https://cursemaven.com") }
