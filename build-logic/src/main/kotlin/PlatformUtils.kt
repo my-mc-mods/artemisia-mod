@@ -55,6 +55,7 @@ fun Project.generateNeoForgeMetadata(ctx: GenerationContext) {
             mods["displayName"] = mod.name
             mods["description"] = mod.description
             mods["iconFile"] = "${mod.id}_logo.png"
+            mods["logoFile"] = "${mod.id}_logo.png" // 一些启动器依然使用 logoFile 获取图标
             mods["authors"] = mod.authors.joinToString(", ")
             mod.contact.forEach { (key, value) ->
                 when (key) {
