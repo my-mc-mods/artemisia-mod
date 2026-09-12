@@ -12,18 +12,18 @@ diffutils = "4.17"
 
 # NeoForge
 # https://projects.neoforged.net/neoforged/neoforge
-neoforge = "26.1.2.94"
+neoforge = "26.2.0.87"
 # https://projects.neoforged.net/neoforged/neoform
-neoform = "26.1.2-1"
+neoform = "26.2-2"
 # https://projects.neoforged.net/neoforged/moddevgradle
-moddev = "2.0.143"
+moddev = "2.0.147"
 # Fabric
 # https://fabricmc.net/develop/
-fabric-api = "0.145.4+26.1.2"
-fabric-loader = "0.19.3"
-fabric-loom = "1.17.16"
+fabric-api = "0.160.0+26.2"
+fabric-loader = "0.19.5"
+fabric-loom = "1.17.19"
 # https://modrinth.com/mod/modmenu/versions
-fabric-modmenu = "18.0.0"
+fabric-modmenu = "20.0.2"
 
 [libraries]
 lombok = { module = "org.projectlombok:lombok", version.ref = "lombok" }

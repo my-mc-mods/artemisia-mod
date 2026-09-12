@@ -15,7 +15,7 @@ public class EasyScreen extends Screen {
 
     @Override
     public void onClose() {
-        this.minecraft.setScreen(lastScreen);
+        this.minecraft.gui.setScreen(lastScreen);
     }
 
     protected void onClose(Button button) {

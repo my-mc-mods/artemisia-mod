@@ -54,7 +54,7 @@ fun Project.generateNeoForgeMetadata(ctx: GenerationContext) {
             mods["version"] = mod.version
             mods["displayName"] = mod.name
             mods["description"] = mod.description
-            mods["logoFile"] = "${mod.id}_logo.png"
+            mods["iconFile"] = "${mod.id}_logo.png"
             mods["authors"] = mod.authors.joinToString(", ")
             mod.contact.forEach { (key, value) ->
                 when (key) {
