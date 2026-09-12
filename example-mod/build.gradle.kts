@@ -25,8 +25,8 @@ dependencies {
     implementation(project(":neoforge"))
 }
 
-tasks.test {
-    useJUnitPlatform()
+tasks.processResources {
+    from(rootProject.file("assets/logo.png")) { rename { "example_logo.png" } }
 }
 
 neoForge {

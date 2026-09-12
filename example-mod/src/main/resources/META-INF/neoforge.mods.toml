@@ -6,6 +6,7 @@ license = "CC0"
 modId = "examplemod"
 version = "0.1.0"
 displayName = "ExampleMod"
+iconFile = "example_logo.png"
 
 [[dependencies.examplemod]]
 modId = "neoforge"
